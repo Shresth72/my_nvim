@@ -5,7 +5,16 @@ local capabilities = config.capabilities
 local lspconfig = require "lspconfig"
 local util = require "lspconfig/util"
 
-local servers = { "tailwindcss", "eslint", "cssls", "terraformls", "jdtls" }
+local servers = { "tailwindcss", "eslint", "cssls", "terraformls", "csharp_ls",
+  -- "jdtls"
+}
+
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+end
 
 local function organize_imports()
   local params = {
@@ -15,7 +24,12 @@ local function organize_imports()
   vim.lsp.buf.execute_command(params)
 end
 
-lspconfig.tsserver.setup {
+lspconfig.pyright.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+lspconfig.ts_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   init_options = {
@@ -31,14 +45,14 @@ lspconfig.tsserver.setup {
   },
 }
 
--- lspconfig.clangd.setup {
---   on_attach = function(client, bufnr)
---     client.server_capabilities.signatureHelpProvider = false
---     on_attach(client, bufnr)
---   end,
---   capabilities = capabilities,
---   cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
--- }
+lspconfig.clangd.setup {
+  on_attach = function(client, bufnr)
+    client.server_capabilities.signatureHelpProvider = false
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
+  cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
+}
 
 lspconfig.gopls.setup {
   on_attach = on_attach,
@@ -72,13 +86,6 @@ lspconfig.yamlls.setup {
     },
   },
 }
-
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
-end
 
 lspconfig.lua_ls.setup {
   settings = {

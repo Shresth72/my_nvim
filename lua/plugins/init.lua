@@ -117,11 +117,32 @@ local default_plugins = {
   },
 
   {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    cmd = { "MasonToolsInstall" },
+    config = function(_, opts)
+      require("mason-tool-installer").setup({
+        ensure_installed = {
+          "java-debug-adapter",
+          "java-test",
+        }
+      })
+
+      vim.api.nvim_command('MasonToolsInstall')
+    end
+  },
+
+  {
     "neovim/nvim-lspconfig",
     event = "User FilePost",
     config = function()
       require "plugins.configs.lspconfig"
     end,
+  },
+
+  -- Java stuff
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = 'java',
   },
 
   -- load luasnips + cmp related in insert mode only
@@ -175,12 +196,12 @@ local default_plugins = {
   {
     "numToStr/Comment.nvim",
     keys = {
-      { "gcc", mode = "n", desc = "Comment toggle current line" },
-      { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
-      { "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
-      { "gbc", mode = "n", desc = "Comment toggle current block" },
-      { "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-      { "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
+      { "gcc", mode = "n",          desc = "Comment toggle current line" },
+      { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
+      { "gc",  mode = "x",          desc = "Comment toggle linewise (visual)" },
+      { "gbc", mode = "n",          desc = "Comment toggle current block" },
+      { "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+      { "gb",  mode = "x",          desc = "Comment toggle blockwise (visual)" },
     },
     init = function()
       require("core.utils").load_mappings "comment"

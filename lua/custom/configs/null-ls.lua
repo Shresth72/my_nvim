@@ -5,14 +5,14 @@ local opts = {
   sources = {
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.formatting.prettier,
-    -- null_ls.builtins.formatting.clang_format,
+    null_ls.builtins.formatting.clang_format,
     null_ls.builtins.formatting.fourmolu,
     null_ls.builtins.formatting.golines,
     null_ls.builtins.formatting.shellharden,
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.yamlfmt,
     null_ls.builtins.formatting.asmfmt,
-    null_ls.builtins.formatting.google_java_format,
+    null_ls.builtins.formatting.csharpier,
   },
   on_attach = function(client, bufnr)
     if client.supports_method "textDocument/formatting" then
