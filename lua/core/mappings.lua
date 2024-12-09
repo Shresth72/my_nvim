@@ -51,6 +51,26 @@ M.general = {
       "Selective replace in whole file (no confirmation)",
     },
 
+    -- Shortcut for System.out.println()
+    ["<leader>p"] = {
+      function()
+        local current_line = vim.fn.getline(".")
+        local current_indent = current_line:match("^%s*") or ""
+
+        if current_line:match("%S") then
+          vim.api.nvim_put({ current_indent .. "System.out.println();" }, "l", true, true)
+          vim.cmd "normal! k"
+        else
+          vim.api.nvim_set_current_line(current_indent .. "System.out.println();")
+        end
+
+        local current_row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+        vim.api.nvim_win_set_cursor(0, { current_row, #current_indent + 19 })
+        vim.cmd "startinsert"
+      end,
+      "Insert System.out.println() and enter insert mode"
+    },
+
     -- Backspace - Back a word
     ["<BS>"] = { "b", "Move one word back" },
 
