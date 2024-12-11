@@ -5,7 +5,7 @@ local capabilities = config.capabilities
 local lspconfig = require "lspconfig"
 local util = require "lspconfig/util"
 
-local servers = { "tailwindcss", "eslint", "cssls", "terraformls", "csharp_ls" }
+local servers = { "tailwindcss", "eslint", "cssls", "terraformls", "csharp_ls", "gradle_ls" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -22,19 +22,35 @@ local function organize_imports()
   vim.lsp.buf.execute_command(params)
 end
 
-lspconfig.pyright.setup {
+lspconfig.pylsp.setup({
   on_attach = on_attach,
   capabilities = capabilities,
+  filetypes = { "python" },
   settings = {
-    python = {
-      analysis = {
-        typeCheckingMode = "basic",
-        reportUnusedVariable = "none",
-        reportUnusedImport = "none",
-      },
-    },
-  },
-}
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          enabled = true,
+          ignore = { "E501", "E402", "E251", "E225", "E226" },
+        }
+      }
+    }
+  }
+})
+
+-- lspconfig.pyright.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   settings = {
+--     python = {
+--       analysis = {
+--         typeCheckingMode = "basic",
+--         reportUnusedVariable = "none",
+--         reportUnusedImport = "none",
+--       },
+--     },
+--   },
+-- }
 
 lspconfig.ts_ls.setup {
   on_attach = on_attach,
