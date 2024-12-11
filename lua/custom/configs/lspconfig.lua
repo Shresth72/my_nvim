@@ -38,20 +38,6 @@ lspconfig.pylsp.setup({
   }
 })
 
--- lspconfig.pyright.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
---   settings = {
---     python = {
---       analysis = {
---         typeCheckingMode = "basic",
---         reportUnusedVariable = "none",
---         reportUnusedImport = "none",
---       },
---     },
---   },
--- }
-
 lspconfig.ts_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -74,6 +60,7 @@ lspconfig.clangd.setup {
     on_attach(client, bufnr)
   end,
   capabilities = capabilities,
+  filetypes = { "c", "cpp" },
   cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
 }
 

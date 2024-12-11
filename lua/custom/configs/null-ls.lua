@@ -13,14 +13,7 @@ local opts = {
     null_ls.builtins.formatting.asmfmt,
     null_ls.builtins.formatting.csharpier,
     null_ls.builtins.formatting.black,
-
-    -- null_ls.builtins.diagnostics.pylint.with({
-    --   command = "pylint",
-    --   args = { "--from-stdin", "$FILENAME" },
-    --   diagnostics_postprocess = function(diagnostic)
-    --     diagnostic.code = diagnostic.message_id
-    --   end,
-    -- }),
+    null_ls.builtins.formatting.google_java_format,
   },
   on_attach = function(client, bufnr)
     if client.supports_method "textDocument/formatting" then
@@ -36,9 +29,6 @@ local opts = {
         end,
       })
     end
-
-    -- local pyopts = { noremap = true, silent = true }
-    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>m", "<cmd>lua vim.lsp.buf.format()<CR>", pyopts)
   end,
 }
 
