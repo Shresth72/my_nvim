@@ -5,7 +5,7 @@ local capabilities = config.capabilities
 local lspconfig = require "lspconfig"
 local util = require "lspconfig/util"
 
-local servers = { "tailwindcss", "eslint", "cssls", "terraformls", "csharp_ls"}
+local servers = { "tailwindcss", "eslint", "cssls", "terraformls", "csharp_ls" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -25,6 +25,15 @@ end
 lspconfig.pyright.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic",
+        reportUnusedVariable = "none",
+        reportUnusedImport = "none",
+      },
+    },
+  },
 }
 
 lspconfig.ts_ls.setup {
