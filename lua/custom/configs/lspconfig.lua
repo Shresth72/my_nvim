@@ -5,7 +5,7 @@ local capabilities = config.capabilities
 local lspconfig = require "lspconfig"
 local util = require "lspconfig/util"
 
-local servers = { "tailwindcss", "eslint", "cssls", "terraformls", "csharp_ls", "gradle_ls", "lemminx", "html" }
+local servers = { "tailwindcss", "eslint", "cssls", "terraformls", "csharp_ls", "gradle_ls", "lemminx", "html", "protols" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {

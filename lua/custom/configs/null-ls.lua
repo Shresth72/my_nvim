@@ -13,6 +13,7 @@ local opts = {
     null_ls.builtins.formatting.asmfmt,
     null_ls.builtins.formatting.csharpier,
     null_ls.builtins.formatting.black,
+    null_ls.builtins.formatting.buf,
     null_ls.builtins.formatting.google_java_format,
   },
   on_attach = function(client, bufnr)
