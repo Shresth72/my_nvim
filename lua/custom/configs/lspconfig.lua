@@ -5,7 +5,19 @@ local capabilities = config.capabilities
 local lspconfig = require "lspconfig"
 local util = require "lspconfig/util"
 
-local servers = { "tailwindcss", "eslint", "cssls", "terraformls", "csharp_ls", "gradle_ls", "lemminx", "html", "protols" }
+local servers = {
+  "tailwindcss",
+  "eslint",
+  "cssls",
+  "terraformls",
+  "csharp_ls",
+  "gradle_ls",
+  "lemminx",
+  "html",
+  "protols",
+  "sqlls",
+  "intelephense",
+}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -22,7 +34,13 @@ local function organize_imports()
   vim.lsp.buf.execute_command(params)
 end
 
-lspconfig.pylsp.setup({
+-- lspconfig.pyright.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   filetypes = { "python" },
+-- }
+
+lspconfig.pylsp.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = { "python" },
@@ -31,12 +49,16 @@ lspconfig.pylsp.setup({
       plugins = {
         pycodestyle = {
           enabled = true,
-          ignore = { "E501", "E402", "E251", "E225", "E226" },
-        }
-      }
-    }
-  }
-})
+          ignore = { "E302", "E261", "E262", "E501", "E402", "E251", "E225", "E226", "E701" },
+        },
+        pyflakes = {
+          enabled = true,
+          ignore = { "F401", "F841" }, -- Ignore unused import error (F401)
+        },
+      },
+    },
+  },
+}
 
 lspconfig.ts_ls.setup {
   on_attach = on_attach,
@@ -61,7 +83,13 @@ lspconfig.clangd.setup {
   end,
   capabilities = capabilities,
   filetypes = { "c", "cpp" },
-  cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--clang-tidy",
+    "--log=verbose",
+    "--header-insertion=iwyu",
+  },
 }
 
 lspconfig.gopls.setup {
@@ -76,6 +104,15 @@ lspconfig.gopls.setup {
       usePlaceholders = true,
       analyses = {
         unusedparams = true,
+      },
+      hints = {
+        assignVariableTypes = false,
+        compositeLiteralFields = false,
+        compositeLiteralTypes = false,
+        constantValues = false,
+        functionTypeParameters = false,
+        parameterNames = false,
+        rangeVariableTypes = false,
       },
     },
   },

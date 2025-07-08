@@ -11,7 +11,7 @@ M.ui = {
   hl_override = {},
   changed_themes = {},
   theme_toggle = { "onedark", "one_light" },
-  theme = "tokyodark",           -- default theme
+  theme = "tokyodark", -- default theme
   transparency = true,
   lsp_semantic_tokens = false, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
 
@@ -22,8 +22,8 @@ M.ui = {
   cmp = {
     icons = true,
     lspkind_text = true,
-    style = "default",            -- default/flat_light/flat_dark/atom/atom_colored
-    border_color = "grey_fg",     -- only applicable for "default" style, use color names from base30 variables
+    style = "default", -- default/flat_light/flat_dark/atom/atom_colored
+    border_color = "grey_fg", -- only applicable for "default" style, use color names from base30 variables
     selected_item_bg = "colored", -- colored / simple
   },
 
@@ -51,28 +51,22 @@ M.ui = {
     load_on_startup = true,
 
     header = {
-      "          ▀████▀▄▄              ▄█ ",
-      "            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ",
-      "    ▄        █          ▀▀▀▀▄  ▄▀  ",
+      "          ▀██▀▀▀▄▄              ▄█ ",
+      "            █▄    ▀▀▄▄▄▄▄    ▄▄▀▀█ ",
+      "    ▄        █          ▀▀▀▀▀  ▄▀  ",
       "   ▄▀ ▀▄      ▀▄              ▀▄▀  ",
       "  ▄▀    █     █▀   ▄█▀▄      ▄█    ",
       "  ▀▄     ▀▄  █     ▀██▀     ██▄█   ",
       "   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ",
       "    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ",
-      "   █   █  █      ▄▄           ▄▀   ",
+      "   █   █  █                   ▄▀   ",
     },
 
-    --header = {
-    --"           ▄ ▄                   ",
-    --"       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
-    --"       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
-    --"    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
-    --"  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
-    --"  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
-    --"▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
-    --"█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
-    --"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
-    --},
+    -- header = function()
+    --   -- vim.fn.system "kitty icat /home/shres/Downloads/pika.png"
+    --   local img_path = "/home/shres/Downloads/pika.png" -- Change this to the path of your PNG image
+    --   return { string.format('kitty +kitten icat --place="10x10" --clear %s', img_path) }
+    -- end,
 
     buttons = {
       { "  Find File", "Spc f f", "Telescope find_files" },
@@ -95,7 +89,7 @@ M.ui = {
   },
 }
 
-M.plugins = ""                                    -- path i.e "custom.plugins", so make custom/plugins.lua file
+M.plugins = "" -- path i.e "custom.plugins", so make custom/plugins.lua file
 
 M.lazy_nvim = require "plugins.configs.lazy_nvim" -- config for lazy.nvim startup options
 
